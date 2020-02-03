@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bells</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+      .has-margins {
+        margin:0px 10px !important;
+      }
+    </style>
+  </head>
+  <body style="padding:24px">
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <nav class="panel is-link">
+            <p class="panel-heading">
+              Controls
+            </p>
+            <div class="panel-block">
+              <button class="button is-link is-outlined is-fullwidth" onclick="enable()">Enable</button>
+            </div>
+            <div class="panel-block">
+              <button class="button is-link is-outlined is-fullwidth" onclick="enable()">Disable</button>
+            </div>
+            <div class="panel-block">
+              <div class="control has-icons-left">
+                <div class="select is-link is-fullwidth">
+                  <select>
+                    <option>School Bell</option>
+                    <option>To be implemented.</option>
+                  </select>
+                </div>
+                <div class="icon is-left">
+                  <i class="fas fa-music"></i>
+                </div>
+              </div>
+            </div>
+            <div class="panel-block">
+              <progress class="progress is-link" value="50" max="100"></progress>
+            </div>
+          </nav>
+        </div>
+        <div class="column">
+          <nav class="panel is-success">
+            <p class="panel-heading">
+              Customization
+            </p>
+            <div class="panel-block">
+              <p>
+                Regular
+              </p>
+            </div>
+            <div class="panel-block">
+              <p>
+                "A"
+              </p>
+            </div>
+            <div class="panel-block">
+              <p>
+                "B"
+              </p>
+            </div>
+          </nav>
+          <nav class="panel is-warning">
+            <p class="panel-heading">
+              Schedule
+            </p>
+            <div class="panel-block">
+              <button class="button is-warning is-outlined is-fullwidth">Import Schedule</button>
+            </div>
+            <div class="panel-block">
+              <button class="button is-warning is-outlined is-fullwidth">Open Editor</button>
+            </div>
+          </nav>
+        </div>
+        <div class="column">
+          <nav class="panel is-danger">
+            <p class="panel-heading">
+              Bells
+            </p>
+            <div class="panel-block">
+              <div class="container">
+                <div>
+                  Period 1
+                </div>
+                <nav class="level">
+                  <div class="level-left">
+                    <div class="level-item">
+                      7:30
+                    </div>
+                  </div>
+                  <progress class="progress is-danger is-small has-margins" value="100" max="100"></progress>
+                  <div class="level-right">
+                    <div class="level-item">
+                      8:10
+                    </div>
+                  </div>
+                </nav>
+              </div>
+            </div>
+            <div class="panel-block">
+              <div class="container">
+                <div>
+                  Period 2
+                </div>
+                <nav class="level">
+                  <div class="level-left">
+                    <div class="level-item">
+                      8:15
+                    </div>
+                  </div>
+                  <progress class="progress is-danger is-small has-margins" value="15" max="100"></progress>
+                  <div class="level-right">
+                    <div class="level-item">
+                      8:55
+                    </div>
+                  </div>
+                </nav>
+              </div>
+            </div>
+            <div class="panel-block">
+                <div class="container">
+                  <div>
+                    Period 3
+                  </div>
+                  <nav class="level">
+                    <div class="level-left">
+                      <div class="level-item">
+                        9:00
+                      </div>
+                    </div>
+                    <progress class="progress is-danger is-small has-margins" value="0" max="100"></progress>
+                    <div class="level-right">
+                      <div class="level-item">
+                        9:40
+                      </div>
+                    </div>
+                  </nav>
+                </div>
+              </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <audio id="bellAudio">
+      <source src="https://www.freesoundslibrary.com/wp-content/uploads/2018/05/school-bell-sound.mp3" type="audio/mp3">
+    </audio>
+    <script type="text/javascript">
+      var audio = document.getElementById("bellAudio");
+      function enable() {
+        setTimeout(function(){audio.play();},1000)
+        setTimeout(function(){audio.pause();audio.currentTime=0;},2000)
+      }
+    </script>
+  </body>
+</html>
