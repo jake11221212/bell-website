@@ -71,7 +71,7 @@
       let currentSchedule;
       window.onload = function() {
         fetch("json/schedules.json").then((response) => {
-          schedules = response.json();
+          schedules = response.json().schedules;
           displaySchedules();
         });
       }
