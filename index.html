@@ -6,6 +6,107 @@
     <title>Bells</title>
     <link rel="stylesheet" href="css/styles.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="js/schedule.js"></script>
+    <script type="text/javascript">
+      const schedules = [
+        {
+            "name": "Regular",
+            "periods": [
+                {
+                    "name": "Period 1",
+                    "startTime": "07:30",
+                    "endTime": "08:10"
+                },
+                {
+                    "name": "Period 2",
+                    "startTime": "08:15",
+                    "endTime": "08:55"
+                },
+                {
+                    "name": "Period 3",
+                    "startTime": "09:00",
+                    "endTime": "09:40"
+                },
+                {
+                    "name": "Homeroom",
+                    "startTime": "09:40",
+                    "endTime": "09:55"
+                },
+                {
+                    "name": "Period 4",
+                    "startTime": "10:00",
+                    "endTime": "10:40"
+                },
+                {
+                    "name": "Period 5",
+                    "startTime": "10:45",
+                    "endTime": "11:25"
+                },
+                {
+                    "name": "Period 6",
+                    "startTime": "11:30",
+                    "endTime": "12:10"
+                },
+                {
+                    "name": "Period 7",
+                    "startTime": "12:15",
+                    "endTime": "12:55"
+                },
+                {
+                    "name": "Period 8",
+                    "startTime": "13:00",
+                    "endTime": "13:40"
+                },
+                {
+                    "name": "Period 9",
+                    "startTime": "13:45",
+                    "endTime": "14:25"
+                }
+            ]
+        }
+    ];
+    </script>
+    <script type="text/javascript">
+      // let schedules;
+      let currentSchedule;
+      window.onload = function() {
+        // fetch("json/schedules.json").then((reponse) => {
+        //   schedules = response.json();
+        // });
+        displaySchedules();
+      }
+      function displaySchedules() {
+        let scheduleElement = document.getElementById("schedules");
+        schedules.forEach(schedule => {
+          scheduleElement.appendChild(stringToNode(`
+            <a id="schedule-${schedule.name}" class="panel-block" onclick="">
+              <span class="panel-icon">
+                <i class="fas fa-clipboard-list" aria-hidden="true"></i>
+              </span>
+              ${schedule.name}
+            </a>
+          `)).onclick = loadSchedule;
+        });
+      }
+      function loadSchedule(e) {
+        let i = 0;
+        let name = e.srcElement.id.split('-')[1];
+        while(schedules[i].name != name) {i++;}
+        currentSchedule = new Schedule(schedules[i]);
+        currentSchedule.setup();
+      }
+      let temp = document.createElement('template');
+      function stringToNode(htmlString) {
+        temp.innerHTML = htmlString.trim();
+        return temp.content.firstChild;
+      }
+      function enable() {
+        currentSchedule.enable();
+      }
+      function disable() {
+        currentSchedule.disable();
+      }
+    </script>
     <style>
       .has-margins {
         margin:0px 10px !important;
@@ -24,7 +125,7 @@
               <button class="button is-link is-outlined is-fullwidth" onclick="enable()">Enable</button>
             </div>
             <div class="panel-block">
-              <button class="button is-link is-outlined is-fullwidth" onclick="enable()">Disable</button>
+              <button class="button is-link is-outlined is-fullwidth" onclick="disable()">Disable</button>
             </div>
             <div class="panel-block">
               <div class="control has-icons-left">
@@ -45,29 +146,14 @@
           </nav>
         </div>
         <div class="column">
-          <nav class="panel is-success">
+          <nav id="schedules" class="panel is-success">
             <p class="panel-heading">
-              Customization
+              Schedules
             </p>
-            <div class="panel-block">
-              <p>
-                Regular
-              </p>
-            </div>
-            <div class="panel-block">
-              <p>
-                "A"
-              </p>
-            </div>
-            <div class="panel-block">
-              <p>
-                "B"
-              </p>
-            </div>
           </nav>
           <nav class="panel is-warning">
             <p class="panel-heading">
-              Schedule
+              Customization
             </p>
             <div class="panel-block">
               <button class="button is-warning is-outlined is-fullwidth">Import Schedule</button>
@@ -78,70 +164,10 @@
           </nav>
         </div>
         <div class="column">
-          <nav class="panel is-danger">
+          <nav id="bells" class="panel is-danger">
             <p class="panel-heading">
               Bells
             </p>
-            <div class="panel-block">
-              <div class="container">
-                <div>
-                  Period 1
-                </div>
-                <nav class="level">
-                  <div class="level-left">
-                    <div class="level-item">
-                      7:30
-                    </div>
-                  </div>
-                  <progress class="progress is-danger is-small has-margins" value="100" max="100"></progress>
-                  <div class="level-right">
-                    <div class="level-item">
-                      8:10
-                    </div>
-                  </div>
-                </nav>
-              </div>
-            </div>
-            <div class="panel-block">
-              <div class="container">
-                <div>
-                  Period 2
-                </div>
-                <nav class="level">
-                  <div class="level-left">
-                    <div class="level-item">
-                      8:15
-                    </div>
-                  </div>
-                  <progress class="progress is-danger is-small has-margins" value="15" max="100"></progress>
-                  <div class="level-right">
-                    <div class="level-item">
-                      8:55
-                    </div>
-                  </div>
-                </nav>
-              </div>
-            </div>
-            <div class="panel-block">
-                <div class="container">
-                  <div>
-                    Period 3
-                  </div>
-                  <nav class="level">
-                    <div class="level-left">
-                      <div class="level-item">
-                        9:00
-                      </div>
-                    </div>
-                    <progress class="progress is-danger is-small has-margins" value="0" max="100"></progress>
-                    <div class="level-right">
-                      <div class="level-item">
-                        9:40
-                      </div>
-                    </div>
-                  </nav>
-                </div>
-              </div>
           </nav>
         </div>
       </div>
@@ -150,11 +176,7 @@
       <source src="https://www.freesoundslibrary.com/wp-content/uploads/2018/05/school-bell-sound.mp3" type="audio/mp3">
     </audio>
     <script type="text/javascript">
-      var audio = document.getElementById("bellAudio");
-      function enable() {
-        setTimeout(function(){audio.play();},1000)
-        setTimeout(function(){audio.pause();audio.currentTime=0;},2000)
-      }
+      let audio = document.getElementById("bellAudio");
     </script>
   </body>
 </html>
