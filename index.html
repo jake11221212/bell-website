@@ -70,16 +70,19 @@
       let schedules;
       let currentSchedule;
       window.onload = function() {
-        fetch("json/schedules.json").then((response) => {
-          schedules = response.json().schedules;
+        fetch("https://jake11221212.github.io/bell-website/json/schedules.json").then((response) => {
+          return response.json();
+        }).then((json) => {
+          schedules = json.schedules;
           displaySchedules();
         });
       }
       function displaySchedules() {
         let scheduleElement = document.getElementById("schedules");
         schedules.forEach(schedule => {
+          schedule.safeName = schedule.name.replace(/[" ]/g, '-');
           scheduleElement.appendChild(stringToNode(`
-            <a id="schedule-${schedule.name}" class="panel-block" onclick="">
+            <a id="schedule-${schedule.safeName}" class="panel-block" onclick="">
               <span class="panel-icon">
                 <i class="fas fa-clipboard-list" aria-hidden="true"></i>
               </span>
@@ -93,8 +96,9 @@
         while(bellContainer.lastChild.id != "bells-header")
           bellContainer.removeChild(bellContainer.lastChild);
         let i = 0;
-        let name = e.srcElement.id.split('-')[1];
-        while(schedules[i].name != name) {i++;}
+        let name = e.srcElement.id.substr(e.srcElement.id.indexOf('-') + 1);
+        console.log(name);
+        while(schedules[i].safeName != name) {i++;}
         currentSchedule = new Schedule(schedules[i]);
         currentSchedule.setup();
       }

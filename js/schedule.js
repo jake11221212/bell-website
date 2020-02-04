@@ -11,7 +11,7 @@ class Schedule {
             endTime.setHours(period.endTime.split(':')[0], period.endTime.split(':')[1],0);
             this.bells.push({
                 "name": period.name,
-                "id": period.name.replace(' ', '-'),
+                "id": period.name.replace(' ', '-').replace('"',''),
                 "startTime": startTime,
                 "endTime": endTime
             });
