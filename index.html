@@ -70,7 +70,7 @@
       let schedules;
       let currentSchedule;
       window.onload = function() {
-        fetch("json/schedules.json").then((reponse) => {
+        fetch("json/schedules.json").then((response) => {
           schedules = response.json();
           displaySchedules();
         });
