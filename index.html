@@ -7,65 +7,6 @@
     <link rel="stylesheet" href="css/styles.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="js/schedule.js"></script>
-    <!-- <script type="text/javascript">
-      const schedules = [
-        {
-            "name": "Regular",
-            "periods": [
-                {
-                    "name": "Period 1",
-                    "startTime": "07:30",
-                    "endTime": "08:10"
-                },
-                {
-                    "name": "Period 2",
-                    "startTime": "08:15",
-                    "endTime": "08:55"
-                },
-                {
-                    "name": "Period 3",
-                    "startTime": "09:00",
-                    "endTime": "09:40"
-                },
-                {
-                    "name": "Homeroom",
-                    "startTime": "09:40",
-                    "endTime": "09:55"
-                },
-                {
-                    "name": "Period 4",
-                    "startTime": "10:00",
-                    "endTime": "10:40"
-                },
-                {
-                    "name": "Period 5",
-                    "startTime": "10:45",
-                    "endTime": "11:25"
-                },
-                {
-                    "name": "Period 6",
-                    "startTime": "11:30",
-                    "endTime": "12:10"
-                },
-                {
-                    "name": "Period 7",
-                    "startTime": "12:15",
-                    "endTime": "12:55"
-                },
-                {
-                    "name": "Period 8",
-                    "startTime": "13:00",
-                    "endTime": "13:40"
-                },
-                {
-                    "name": "Period 9",
-                    "startTime": "13:45",
-                    "endTime": "14:25"
-                }
-            ]
-        }
-    ];
-    </script> -->
     <script type="text/javascript">
       let schedules;
       let currentSchedule;
@@ -75,6 +16,8 @@
         }).then((json) => {
           schedules = json.schedules;
           displaySchedules();
+          currentSchedule = new Schedule(schedules[0]);
+          currentSchedule.setup();
         });
       }
       function displaySchedules() {
@@ -83,10 +26,12 @@
           schedule.safeName = schedule.name.replace(/[" ]/g, '-');
           scheduleElement.appendChild(stringToNode(`
             <a id="schedule-${schedule.safeName}" class="panel-block" onclick="">
-              <span class="panel-icon">
+              <span class="panel-icon is-size-5">
                 <i class="fas fa-clipboard-list" aria-hidden="true"></i>
               </span>
-              ${schedule.name}
+              <p class="is-size-5">
+                ${schedule.name}
+              </p>
             </a>
           `)).onclick = loadSchedule;
         });
@@ -123,7 +68,25 @@
   <body style="padding:24px">
     <div class="container">
       <div class="columns">
-        <div class="column">
+        <div class="column is-one-quater">
+          <nav id="schedules" class="panel is-success">
+            <p class="panel-heading">
+              Schedules
+            </p>
+          </nav>
+          <nav class="panel is-warning">
+            <p class="panel-heading">
+              Customization
+            </p>
+            <div class="panel-block">
+              <button class="button is-warning is-outlined is-fullwidth">Import Schedule</button>
+            </div>
+            <div class="panel-block">
+              <button class="button is-warning is-outlined is-fullwidth">Open Editor</button>
+            </div>
+          </nav>
+        </div>
+        <div class="column is-one-quater">
           <nav class="panel is-link">
             <p class="panel-heading">
               Controls
@@ -152,25 +115,7 @@
             </div>
           </nav>
         </div>
-        <div class="column">
-          <nav id="schedules" class="panel is-success">
-            <p class="panel-heading">
-              Schedules
-            </p>
-          </nav>
-          <nav class="panel is-warning">
-            <p class="panel-heading">
-              Customization
-            </p>
-            <div class="panel-block">
-              <button class="button is-warning is-outlined is-fullwidth">Import Schedule</button>
-            </div>
-            <div class="panel-block">
-              <button class="button is-warning is-outlined is-fullwidth">Open Editor</button>
-            </div>
-          </nav>
-        </div>
-        <div class="column">
+        <div class="column is-half">
           <nav id="bells" class="panel is-danger">
             <p id="bells-header" class="panel-heading">
               Bells
