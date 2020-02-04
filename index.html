@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="js/schedule.js"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       const schedules = [
         {
             "name": "Regular",
@@ -65,15 +65,15 @@
             ]
         }
     ];
-    </script>
+    </script> -->
     <script type="text/javascript">
-      // let schedules;
+      let schedules;
       let currentSchedule;
       window.onload = function() {
-        // fetch("json/schedules.json").then((reponse) => {
-        //   schedules = response.json();
-        // });
-        displaySchedules();
+        fetch("json/schedules.json").then((reponse) => {
+          schedules = response.json();
+          displaySchedules();
+        });
       }
       function displaySchedules() {
         let scheduleElement = document.getElementById("schedules");
@@ -89,6 +89,9 @@
         });
       }
       function loadSchedule(e) {
+        let bellContainer = document.getElementById("bells");
+        while(bellContainer.lastChild.id != "bells-header")
+          bellContainer.removeChild(bellContainer.lastChild);
         let i = 0;
         let name = e.srcElement.id.split('-')[1];
         while(schedules[i].name != name) {i++;}
@@ -165,7 +168,7 @@
         </div>
         <div class="column">
           <nav id="bells" class="panel is-danger">
-            <p class="panel-heading">
+            <p id="bells-header" class="panel-heading">
               Bells
             </p>
           </nav>

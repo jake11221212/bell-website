@@ -1,7 +1,7 @@
 {
     "schedules": [
         {
-            "name": "Regular",
+            "name": "\"A\" Regular",
             "periods": [
                 {
                     "name": "Period 1",
@@ -51,6 +51,56 @@
                 {
                     "name": "Period 9",
                     "startTime": "13:45",
+                    "endTime": "14:25"
+                }
+            ]
+        },
+        {
+            "name": "1 Hour Delay",
+            "periods": [
+                {
+                    "name": "Period 1",
+                    "startTime": "08:30",
+                    "endTime": "09:05"
+                },
+                {
+                    "name": "Period 2",
+                    "startTime": "09:10",
+                    "endTime": "09:45"
+                },
+                {
+                    "name": "Period 3",
+                    "startTime": "09:50",
+                    "endTime": "10:25"
+                },
+                {
+                    "name": "Period 4",
+                    "startTime": "10:30",
+                    "endTime": "11:05"
+                },
+                {
+                    "name": "Period 5",
+                    "startTime": "11:10",
+                    "endTime": "11:45"
+                },
+                {
+                    "name": "Period 6",
+                    "startTime": "11:50",
+                    "endTime": "12:25"
+                },
+                {
+                    "name": "Period 7",
+                    "startTime": "12:30",
+                    "endTime": "13:05"
+                },
+                {
+                    "name": "Period 8",
+                    "startTime": "13:10",
+                    "endTime": "13:45"
+                },
+                {
+                    "name": "Period 9",
+                    "startTime": "13:50",
                     "endTime": "14:25"
                 }
             ]
