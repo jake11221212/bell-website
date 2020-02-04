@@ -24,18 +24,18 @@ class Schedule {
             bellsContainer.appendChild(stringToNode(`
                 <div class="panel-block">
                     <div class="container">
-                    <div>
+                    <div class="is-size-5">
                         ${bell.name}
                     </div>
                     <nav class="level">
                         <div class="level-left">
-                        <div class="level-item">
+                        <div class="level-item is-size-5">
                             ${bell.startTime.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' })}
                         </div>
                         </div>
-                        <progress id="${bell.id}" class="progress is-danger is-small has-margins" value="0" max="${bell.endTime - bell.startTime}"></progress>
+                        <progress id="${bell.id}" class="progress is-danger has-margins" value="0" max="${bell.endTime - bell.startTime}"></progress>
                         <div class="level-right">
-                        <div class="level-item">
+                        <div class="level-item is-size-5">
                             ${bell.endTime.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' })}
                         </div>
                         </div>
